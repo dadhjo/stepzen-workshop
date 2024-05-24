@@ -1,0 +1,62 @@
+""" Details on an Order in the system."""
+type Order {
+  """The tracking id for the order"""
+  trackingId: String
+  """The total tax of the order"""  
+  tax: Float
+  """The shipping cost of the order"""
+  shippingCost: Float
+  """The internal product id ordered"""
+  productid: Int!
+  """The total cost of the order"""
+  lineitemsCost: Float
+  """The internal order id"""
+  id: Int!
+  """The internal customer id"""
+  customerId: Int!
+  """The date the order was created"""
+  createdOn: Date
+  """The shipping carrier"""
+  carrier: String
+}
+
+type Query {
+  """Get an order by id"""
+  order(id: Int!): Order
+    @dbquery(type: "mysql", table: "orders", configuration: "order_config")
+  """Get orders using an (optional) filter"""
+  orders(filter: OrderFilter): [Order]
+    @dbquery(type: "mysql", table: "orders", configuration: "order_config")
+  """Get orders by customer id"""
+  ordersByCustomerId(customerId: Int!): [Order]
+    @dbquery(type: "mysql", table: "orders", configuration: "order_config")
+}
+
+
+input StringFilter {
+  eq: String
+  like: String
+}
+
+input FloatFilter {
+  eq: Float
+  gt: Float
+  lt: Float
+}
+
+input IntFilter {
+  eq: Int
+  ne: Int
+  gt: Int
+  lt: Int
+}
+
+"""Filter input type for orders"""
+input OrderFilter {
+  trackingId: StringFilter
+  shippingCost: FloatFilter
+  productid: IntFilter
+  #lineitemsCost: FloatFilter
+  customerId: IntFilter
+  carrier: StringFilter
+}

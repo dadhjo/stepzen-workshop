@@ -1,0 +1,4 @@
+configurationset:
+  - configuration:
+      name: order_config
+      dsn: testuservalle:GlueChompUntaintedTattered1022@tcp(35.224.227.100)/valle

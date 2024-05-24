@@ -1,0 +1,4 @@
+type Query {
+  customers(name: String, email: String, contact_email: String): [Customer]
+    @rest(endpoint: "https://customerapi-zo6fgz3fza-uc.a.run.app/customers")
+}

@@ -1,0 +1,16 @@
+extend type Customer {
+    orders: [Order]
+      @materializer(
+        query: "ordersByCustomerId"
+        arguments: [
+          { name: "customerId", field: "id" }
+        ]
+      )
+}
+
+# extend type Customer {
+#   weather: Weather
+#     @materializer(
+#       query: "weatherForAddressParts"
+#     )
+# }
